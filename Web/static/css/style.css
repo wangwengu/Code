@@ -1,0 +1,22 @@
+/* 使用系统预设的颜色 */
+p:first-child {
+    color: red;
+}
+
+/* 使用十六进制设置颜色 */
+p:nth-child(2) {
+    /* 第一种方式 */
+    color: #ADD8E6;
+    /* 第二种方式, 其等价于#AABBCC */
+    color: #ABC;
+}
+
+/* 使用rgb方式设置颜色, (red, green, blue) */
+p:nth-child(3) {
+    color: rgb(173, 216, 230);
+}
+
+/* 使用rgba方式设置颜色, 最后的参数是透明度 */
+p:nth-child(4) {
+    color: rgba(0, 255, 255, 1);
+}
