@@ -5,42 +5,40 @@
 using namespace std;
 typedef pair<int, int> PII;
 const int N = 110;
-int n, m;
-int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
+int n, m, k;
+int dx[] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int dy[] = {1, 2, 2, 1, -1, -2, -2, -1};
+PII match[N];
 int g[N][N], st[N][N];
-PII match[N][N];
 bool dfs(int x, int y) {
-    for (int i = 0; i < 4; i ++ ) {
+    for (int i = 0; i < 8; i ++ ) {
         int tx = x + dx[i];
         int ty = y + dy[i];
-        if (tx < 1 || tx > n || ty < 1 || ty > m || !g[tx][ty] || st[tx][ty]) continue;
+        if (tx < 1 || tx > n || ty < 1 || ty > m || g[tx][ty] || st[tx][ty]) continue;
         st[tx][ty] = true;
         PII t = match[tx][ty];
-        if (t.x == -1 || dfs(t.x, t.y)) {
-            match[tx][ty] = {x, y};
+        if (t.x == 0 || dfs(t.x, t.y)) {
+            match[t.x][t.y] = {x, y};
             return true;
         }
     }
     return false;
 }
 int main() {
-    scanf("%d%d", &n, &m);
-    for (int i = 0; i < m; i ++ ) {
-        int x, y;
-        scanf("%d%d", &x, &y);
-        g[x][y] = true;
+    scanf("%d%d%d", &n, &m, &k);
+    for (int i = 0; i < k; i ++ ) {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        g[a][b] = 1;
     }
-    memset(match, -1, sizeof match);
     int res = 0;
-    // 枚举每一个奇数格子
     for (int i = 1; i <= n; i ++ ) {
-        for (int j = 1; j <= n; j ++ ) {
-            if ((i + j) & 1 && !g[i][j]) {
-                memset(st, 0, sizeof st);
-                if (dfs(i, j)) res ++;
-            }
+        for (int j = 1; j <= m; j ++ ) {
+            if ((i + j) & 1 && g[i][j]) continue;
+            memset(st, 0, sizeof st);
+            if (dfs(i, j)) res ++;
         }
     }
-    cout << res << endl;
+    cout << n * m - k - res << endl;
     return 0;
 }
