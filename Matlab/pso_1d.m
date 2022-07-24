@@ -16,7 +16,7 @@ c1 = 0.7; % 加速因子(权重)
 c2 = 0.5; % 加速因子(权重)
 k = 0.8; % 惯性因子
 
-V = repmat(v, birds, 1); % 将v拓展成20 * 10的矩阵å
+V = repmat(v, birds, 1); % 将v拓展成20 * 10的矩阵
 W = repmat(w, birds, 1); % 将w拓展成20 * 10的矩阵
 x = round(rand(birds, n)); % 初始化每一维的位置 20 * 10, m维空间, m维的坐标
 v_0 = rand(birds, n); % 初始化速度矩阵, 每个粒子的速度

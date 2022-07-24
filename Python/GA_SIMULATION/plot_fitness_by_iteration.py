@@ -7,7 +7,11 @@ from parameters import *
 import local_algorithm as la
 import random_algorithm as ra
 import genetic_algorithm as ga
-
+import copy
+import random
+import numpy as np
+import taskinitial as ti
+import matplotlib.pyplot as plt
 #画图函数
 def plot_fitness_by_iteration():
 
@@ -16,14 +20,14 @@ def plot_fitness_by_iteration():
 	
 
 	#随机生成一个任务流，并保存前驱任务和后驱任务
-	Task_order,Pre_task_dict,Sub_task_dict=ti.Order_initial(task_num)
+	Task_order,Pre_task_dict,Sub_task_dict=ti.Order_init(task_num)
 
 	#前驱任务和后驱任务保存为一个列表，其值为一个字典
 	Pre_task=[];Sub_task=[];Pre_task.append(Pre_task_dict);Sub_task.append(Sub_task_dict)
 
 	#随机生成50个位置编码,对应50个排序，而不是50个工作流
 	Ga_initial_location=np.zeros((10,task_num))
-	Ga_initial_location=ti.Position_intial(10,task_num,Ga_initial_location)
+	Ga_initial_location=ti.Position_init(10,task_num,Ga_initial_location)
 
 	#由于用到了遗传算法，所以需要先进行初始化
 	Ga_initial_sequence=np.int32(np.zeros((10,task_num)))
@@ -36,7 +40,7 @@ def plot_fitness_by_iteration():
 
 	#再遵循任务流依赖关系，生成10个排序编码，工作量编码和输出量编码
 	for j in range(10):
-		Ga_initial_sequence[j],WorkLoad_initial[j],OutputSize_initial[j]=ti.Order_re_initial(np.array(Task_order),Pre_task_dict,WorkLoad,OutputSize)
+		Ga_initial_sequence[j],WorkLoad_initial[j],OutputSize_initial[j]=ti.Order_re_init(np.array(Task_order),Pre_task_dict,WorkLoad,OutputSize)
 
 	#迭代次数为[10,20,30,40,50]
 	for i in range(10,51,10):

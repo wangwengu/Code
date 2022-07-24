@@ -1,46 +1,21 @@
-div {
-    /* 宽度 */
-    width: 800px;
-    /* 高度 */
+.div-root {
+    width: 100%;
     height: 500px;
-    /* 外边距 */
-    margin: 10px;
-    /* 内边距 */
-    padding: 20px;
-    /* 背景颜色 */
     background-color: lightblue;
-    /* 强行修改成行内元素 */
-    display: inline;
-    /* 设置空白 */
-    white-space: pre;
+    display: flex;
 }
 
-span {
-    /* 设置宽度 */
+.div-root > div {
     width: 50px;
-    /* 设置高度 */
-    height: 100px;
-    /* 设置左外边距 */
-    margin-left: 50px;
-    /* 设置左内边距 */
-    padding-left: 20px;
-    /* 设置背景颜色 */
-    background-color: gray;
-    /* 强行修改成块状元素 */
-    display: block;
-    /* 当元素的内容超出元素的大小 */
-    overflow: hidden;
-    /* 如何处理超出的内容元素 */
-    text-overflow: ellipsis;
-}
-
-img {
-    /* 宽度 */
-    width: 50px;
-    /* 高度 */
     height: 50px;
-    /* 外边距 */
-    margin: 5px;
-    /* 内边距 */
-    padding: 20px;
+    margin-right: 2px;
+    /* flex-basis: 20px; */
+}
+
+.div-root > div:nth-child(odd) {
+    background-color: lightcoral;
+}
+
+.div-root > div:nth-child(even) {
+    background-color: lightgreen;
 }

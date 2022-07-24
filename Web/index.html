@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/index.css">
     <title>Document</title>
 </head>
 <body>
-    <div>离离原上草</div>
-    <span>一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣一岁一枯荣</span>
-    <img src="/static/images/logo.png" alt="">
-    <div>
-int main() {
-    int a, b;
-    cin >> a >> b;
-    return 0;
-}
-    </div>
+    <textarea class="first"></textarea>
+    <br>
+    <button>run</button>
+    <br>
+    <br>
+    <textarea class="second"></textarea>
+    <!-- 模块化编程 -->
+    <script type="module">
+        // 将函数func暴露出来
+        import {func} from "/static/js/index.js";
+        // 调用func函数
+        func();
+    </script>
 </body>
 </html>

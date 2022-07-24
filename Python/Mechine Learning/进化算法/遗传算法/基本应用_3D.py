@@ -56,7 +56,6 @@ def crossover_and_mutation(pop, CROSSOVER_RATE=0.8):
             child[cross_points:] = mother[cross_points:]  # 孩子得到位于交叉点后的母亲的基因
         mutation(child)  # 每个后代有一定的机率发生变异
         new_pop.append(child)
-
     return new_pop
 
 

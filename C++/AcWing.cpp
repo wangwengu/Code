@@ -1,44 +1,69 @@
 #include <iostream>
-#include <cstring>
-#define x first
-#define y second
 using namespace std;
-typedef pair<int, int> PII;
-const int N = 110;
-int n, m, k;
-int dx[] = {-2, -1, 1, 2, 2, 1, -1, -2};
-int dy[] = {1, 2, 2, 1, -1, -2, -2, -1};
-PII match[N];
-int g[N][N], st[N][N];
-bool dfs(int x, int y) {
-    for (int i = 0; i < 8; i ++ ) {
-        int tx = x + dx[i];
-        int ty = y + dy[i];
-        if (tx < 1 || tx > n || ty < 1 || ty > m || g[tx][ty] || st[tx][ty]) continue;
-        st[tx][ty] = true;
-        PII t = match[tx][ty];
-        if (t.x == 0 || dfs(t.x, t.y)) {
-            match[t.x][t.y] = {x, y};
-            return true;
-        }
+typedef long long LL;
+const int N = 33010, INF = 1e9;
+int n, idx, root;
+int g[N];
+struct Tree {
+    int l, r, key, val;
+}tr[N];
+int get_node(int key) {
+    tr[++ idx].key = key;
+    tr[idx].val = rand();
+    return idx;
+}
+void zig(int &p) {
+    int q = tr[p].l;
+    tr[p].l = tr[q].r, tr[q].r = p, p = q;
+    return;
+}
+void zag(int &p) {
+    int q = tr[p].r;
+    tr[p].r = tr[q].l, tr[q].l = p, p = q;
+    return;
+}
+void build() {
+    get_node(-INF);
+    get_node(INF);
+    root = 1;
+    return;
+}
+void insert(int &u, int x) {
+    if (!u) u = get_node(x);
+    else if (x < tr[u].key) {
+        insert(tr[u].l, x);
+        if (tr[tr[u].l].val > tr[u].val) zig(u);
     }
-    return false;
+    else if (x > tr[u].key) {
+        insert(tr[u].r, x);
+        if (tr[tr[u].r].val > tr[u].val) zag(u);
+    }
+    return;
+}
+int get_prev(int u, int x) {
+    if (!u) return -INF;
+    if (x <= tr[u].key) return get_prev(tr[u].l, x);
+    return max(tr[u].key, get_prev(tr[u].r, x));
+}
+int get_next(int u, int x) {
+    if (!u) return INF;
+    if (x >= tr[u].key) return get_next(tr[u].r, x);
+    return min(tr[u].key, get_next(tr[u].l, x));
 }
 int main() {
-    scanf("%d%d%d", &n, &m, &k);
-    for (int i = 0; i < k; i ++ ) {
-        int a, b;
-        scanf("%d%d", &a, &b);
-        g[a][b] = 1;
-    }
-    int res = 0;
+    scanf("%d", &n);
+    build();
     for (int i = 1; i <= n; i ++ ) {
-        for (int j = 1; j <= m; j ++ ) {
-            if ((i + j) & 1 && g[i][j]) continue;
-            memset(st, 0, sizeof st);
-            if (dfs(i, j)) res ++;
+        scanf("%d", &g[i]);
+        insert(root, g[i]);
+    }
+    LL res = 0;
+    for (int i = 1; i <= n; i ++ ) {
+        if (i == 1) res += g[i];
+        else {
+            res += min(g[i] - get_prev(root, g[i]), get_next(root, g[i]) - g[i]);
         }
     }
-    cout << n * m - k - res << endl;
+    printf("%lld\n", res);
     return 0;
 }
