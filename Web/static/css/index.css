@@ -1,17 +1,5 @@
-.first {
-    /* 宽度 */
-    width: 300px;
-    /* 高度 */
-    height: 100px;
-    /* 背景颜色 */
+div {
+    width: 200px;
+    height: 200px;
     background-color: lightblue;
-}
-
-.second {
-    /* 宽度 */
-    width: 300px;
-    /* 高度 */
-    height: 100px;
-    /* 背景颜色 */
-    background-color: lightcyan;
 }

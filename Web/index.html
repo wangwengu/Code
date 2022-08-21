@@ -4,22 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.acwing.com/static/jquery/js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="/static/css/index.css">
     <title>Document</title>
 </head>
 <body>
-    <textarea class="first"></textarea>
-    <br>
-    <button>run</button>
-    <br>
-    <br>
-    <textarea class="second"></textarea>
-    <!-- 模块化编程 -->
+    <div age="18"></div>
     <script type="module">
-        // 将函数func暴露出来
-        import {func} from "/static/js/index.js";
-        // 调用func函数
-        func();
+        import {main} from '/static/js/index.js';
+        main();
     </script>
 </body>
 </html>

@@ -1,17 +1,13 @@
-// 获取输入的权柄
-let input = document.querySelector(".first");
-// 获取运行的权柄
-let run = document.querySelector("button");
-// 获取输出的权柄
-let output = document.querySelector(".second");
+let main = function() {
+    // 获取权柄
+    let $div = $('div');
+    $div.on("click", () => {
+        // 将属性age的值由18改20
+        $div.attr('age', 20);
+        console.log($div.attr('age'));
+    });
+};
 
-// 定义函数
-function func() {
-    let num = 3.1415926;
-    console.log(num.toFixed(5));
-}
-
-// 将函数暴露出去
 export {
-    func,
+    main,
 }
