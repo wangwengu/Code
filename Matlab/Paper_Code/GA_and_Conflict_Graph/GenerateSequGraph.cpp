@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int n = 4;
+int n = 3;
 int cols[10];
 int graph[10][10];
 void dfs(int x, int y, int s) {
