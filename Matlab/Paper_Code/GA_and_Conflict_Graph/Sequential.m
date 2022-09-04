@@ -1,4 +1,4 @@
-function [Ls, Ps] = sequential(Np, eta, x, T, S, D)
+function [Ls, Ps] = Sequential(Np, eta, x, T, S, D)
     %% 计算Du
     % 步骤1: 计算du
     du = zeros(size(S, 1), size(T, 1));

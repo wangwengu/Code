@@ -1,4 +1,4 @@
-function [Lp, Pp] = parallel(Np, eta, x, T, S)
+function [Lp, Pp] = Parallel(Np, eta, x, T, S)
     %% 计算Du
     % 步骤1: 计算du
     du = zeros(size(S, 1), size(T, 1));
