@@ -9,9 +9,9 @@ while true
     % 生成初代种群
     nPop = randi([0, 1], n, m);
     % 翻译DNA
-    translateDNAResult = GAParaTranslateDNA(nPop);
+    translateDNAResult = GASequTranslateDNA(nPop);
     % 合格的种群
-    [checkResult, nPop] = GAParaCheck(translateDNAResult, nPop);
+    [checkResult, nPop] = GASequCheck(translateDNAResult, nPop);
     if size(nPop, 1) >= 1
         break;
     end
@@ -27,20 +27,21 @@ for i = 1 : MaxIt
     % 繁衍子代
     for j = 1 : 2 : n
         % 选择
-        [p1, p2] = GAParaSelect(nPop);
+        [p1, p2] = GASequSelect(nPop);
         % 交叉
-        [newPop(j, :), newPop(j + 1, :)] = GAParaCrossOver(p1, p2);
+        [newPop(j, :), newPop(j + 1, :)] = GASequCrossOver(p1, p2);
         % 变异
-        newPop(j, :) = GAParaMutation(newPop(j, :), mutationR);
-        newPop(j + 1, :) = GAParaMutation(newPop(j + 1, :), mutationR);
+        newPop(j, :) = GASequMutation(newPop(j, :), mutationR);
+        newPop(j + 1, :) = GASequMutation(newPop(j + 1, :), mutationR);
     end
     newPopulation = [nPop; newPop];
     % 翻译DNA
-    translateDNAResult = GAParaTranslateDNA(newPopulation);
+    translateDNAResult = GASequTranslateDNA(newPopulation);
     % 合格的种群
-    [checkResult, newPopulation] = GAParaCheck(translateDNAResult, newPopulation);
+    [checkResult, newPopulation] = GASequCheck(translateDNAResult, newPopulation);
+%     disp(checkResult);
     % 计算适应度
-    [Lp, Pp, get_fitness, eta] = GAParaFitness(checkResult);
+    [Lp, Pp, get_fitness, eta] = GASequFitness(checkResult);
     [~, index] = sort(get_fitness, "descend");
     if get_fitness(1, 1) > Max_get_fitness
         Max_get_fitness = get_fitness(1, 1);

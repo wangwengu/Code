@@ -1,4 +1,4 @@
-function [checkResult, nPop] = GAParaCheck(translateDNAResult, nPop)
+function [checkResult, nPop] = GASequCheck(translateDNAResult, nPop)
     [n, m] = size(translateDNAResult);
     checkResult = zeros(n, m);
     k = 1; % 符合条件子代的下标
@@ -8,11 +8,13 @@ function [checkResult, nPop] = GAParaCheck(translateDNAResult, nPop)
         hash = zeros(1, m);
         for j = 1 : m
             gene = translateDNAResult(i, j);
-            % 判断任何俩任务不可分配到同一服务器
+            % 判断任何连续的两个子任务不可分配到同一个服务器
             hash(gene) = hash(gene) + 1;
             if hash(gene) > 1
-                flag = false;
-                break;
+                if and(j > 1, translateDNAResult(i, j - 1) == gene)
+                    flag = false;
+                    break;
+                end
             end
         end
         if flag
