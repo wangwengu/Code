@@ -1,6 +1,6 @@
 function [Np, U, D, eta, x, T, S] = Constant()
     %% 常量
-    Np = 20;
+    Np = 20 * 8;
     U = 1000;
     D = 200;
     

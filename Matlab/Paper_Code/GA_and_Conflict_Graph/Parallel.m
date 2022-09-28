@@ -11,10 +11,7 @@ function [Lp, Pp] = Parallel(Np, eta, x, T, S)
     Du = zeros(1, size(T, 1));
     for j = 1 : size(T, 1)
         for i = 1 : size(S, 1)
-            if eta(i, j) == 0
-                continue;
-            end
-            Du(1, j) = eta(i, j) * du(i, j);
+            Du(1, j) = Du(1, j) + eta(i, j) * du(i, j);
         end
     end
     
@@ -30,10 +27,7 @@ function [Lp, Pp] = Parallel(Np, eta, x, T, S)
     Dc = zeros(1, size(T, 1));
     for j = 1 : size(T, 1)
         for i = 1 : size(S, 1)
-            if eta(i, j) == 0
-                continue;
-            end
-            Dc(1, j) = eta(i, j) * dc(i, j);
+            Dc(1, j) = Dc(1, j) + eta(i, j) * dc(i, j);
         end
     end
     
@@ -41,9 +35,6 @@ function [Lp, Pp] = Parallel(Np, eta, x, T, S)
     Dhp = zeros(1, size(T, 1));
     for i = 1 : size(T, 1)
         for j = 1 : i - 1
-            if x(j, i) == 0
-                continue;
-            end
             Dhp(1, i) = x(j, i) * (Du(1, j) + Dhp(j) + Dc(j) - Du(i));
         end
         Dhp(1, i) = max(0, max(Dhp(1, i)));
@@ -61,10 +52,7 @@ function [Lp, Pp] = Parallel(Np, eta, x, T, S)
     Dd = zeros(1, size(T, 1));
     for j = 1 : size(T, 1)
         for i = 1 : size(S, 1)
-            if eta(i, j) == 0
-                continue;
-            end
-            Dd(1, j) = eta(i, j) * dd(i, j);
+            Dd(1, j) = Dd(1, j) + eta(i, j) * dd(i, j);
         end
     end
     

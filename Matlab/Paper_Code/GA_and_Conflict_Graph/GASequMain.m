@@ -39,7 +39,6 @@ for i = 1 : MaxIt
     translateDNAResult = GASequTranslateDNA(newPopulation);
     % 合格的种群
     [checkResult, newPopulation] = GASequCheck(translateDNAResult, newPopulation);
-%     disp(checkResult);
     % 计算适应度
     [Lp, Pp, get_fitness, eta] = GASequFitness(checkResult);
     [~, index] = sort(get_fitness, "descend");
@@ -50,8 +49,8 @@ for i = 1 : MaxIt
         Best_matrix = checkResult(index(1, 1), :);
     end
     nPop = newPopulation(index(1 : n), :);
-    fprintf("适应度函数:\n%f\n", Max_get_fitness);
-    fprintf("卸载矩阵:\n");
-    disp(Best_matrix);
     fprintf("第%d代已经迭代结束\n", i);
 end
+fprintf("适应度: %f\n卸载延迟: %f\n卸载失败率: %f\n", Max_get_fitness, Min_Lp, Min_Pp);
+fprintf("卸载矩阵:\n");
+disp(Best_matrix);

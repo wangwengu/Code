@@ -1,1 +1,0 @@
-ParaConflictGraph(4, 4);
