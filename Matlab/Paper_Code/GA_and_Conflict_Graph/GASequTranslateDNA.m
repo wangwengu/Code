@@ -1,15 +1,19 @@
 function translateDNAResult = GASequTranslateDNA(nPop)
     [n, m] = size(nPop);
-    translateDNAResult = zeros(n, 4);
+    % 子任务的数量
+    taskNum = 6;
+    % 子任务的数量的二进制个数(向上取整)
+    bitNum = ceil(log2(taskNum));
+    translateDNAResult = zeros(n, taskNum);
     for i = 1 : n
-        index = 4;
+        index = taskNum;
         exp = 0;
         for j = m : -1 : 1
             if nPop(i, j) == 1
                 translateDNAResult(i, index) = translateDNAResult(i, index) + 2 ^ exp;
             end
             exp = exp + 1;
-            if exp == 2
+            if exp == bitNum
                 exp = 0;
                 index = index - 1;
             end

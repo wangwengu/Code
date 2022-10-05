@@ -8,6 +8,10 @@ function [checkResult, nPop] = GAParaCheck(translateDNAResult, nPop)
         hash = zeros(1, m);
         for j = 1 : m
             gene = translateDNAResult(i, j);
+            if gene > m
+                flag = false;
+                break;
+            end
             % 判断任何俩任务不可分配到同一服务器
             hash(gene) = hash(gene) + 1;
             if hash(gene) > 1
